@@ -202,7 +202,7 @@ def convert_to_hex(argument):
     return hex_representation(string_to_card_list(argument))
     
 def string_to_card_list(argument):
-    check_number_of_characters(argument)
+    enforce_62_characters(argument)
     listOfCards = [argument[i:i+2] for i in range(0, 62, 2)]
     check_if_cards(listOfCards)
     check_for_card_repetition(listOfCards)
@@ -212,7 +212,7 @@ def convert_to_cards(value):
     check_hex_is_in_range(value)
     return corresponding_cards(value)
     
-def check_number_of_characters(argument):
+def enforce_62_characters(argument):
     """Raise an exception if not exactly 31 cards."""
     length = len(argument)
     if length < 62:
