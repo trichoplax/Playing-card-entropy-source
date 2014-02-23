@@ -199,11 +199,14 @@ def nonwhitespace(argument):
     return "".join(argument.split())
     
 def convert_to_hex(argument):
+    return hex_representation(string_to_card_list(argument))
+    
+def string_to_card_list(argument):
     check_number_of_characters(argument)
     listOfCards = [argument[i:i+2] for i in range(0, 62, 2)]
     check_if_cards(listOfCards)
     check_for_card_repetition(listOfCards)
-    return hex_representation(listOfCards)
+    return listOfCards
 
 def convert_to_cards(value):
     check_hex_is_in_range(value)
