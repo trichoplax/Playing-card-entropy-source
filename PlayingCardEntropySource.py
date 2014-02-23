@@ -210,7 +210,7 @@ def string_to_card_list(cleanString):
 
 def integer_to_card_string(value):
     enforce_upper_limit(value)
-    return corresponding_card_string(value)
+    return integer_to_card_string(value)
     
 def enforce_62_characters(argument):
     """Raise an exception if not exactly 31 cards."""
@@ -329,7 +329,7 @@ def card_list_to_hex(listOfCards):
     result = sum(listOfNumbers)
     return hex(result)[2:]
     
-def corresponding_card_string(value):
+def integer_to_card_string(value):
     """Return a string of 31 cards representing the value.
     
     Divide the value by 52 making a note of quotient and remainder.
