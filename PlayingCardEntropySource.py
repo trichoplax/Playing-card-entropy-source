@@ -125,10 +125,6 @@ class Error(Exception):
     """Base class for exceptions in this module."""
     pass
     
-class UnrecognisedCharacterError(Error):
-    """Exception for input containing an unexpected character."""
-    pass
-
 class TooFewCardsError(Error):
     """Exception for input with fewer than 62 nonwhitespace characters."""
     pass
@@ -158,9 +154,6 @@ FACTORIAL_52 = factorial(52)
 UPPER_LIMIT = FACTORIAL_52//factorial(52-31) - 1
 CARD_RANKS = "A23456789TJQK"
 CARD_SUITS = "SHDC"
-cardCharacters = CARD_RANKS + CARD_SUITS
-hexCharacters = "0123456789ABCDEF"
-RECOGNISED_CHARACTERS = set(cardCharacters + hexCharacters)
 allCards = [(rank + suit) for suit in CARD_SUITS for rank in CARD_RANKS]
 
 def request_input():
@@ -191,7 +184,6 @@ def decide_how_to_convert(inputString):
     hexadecimal string.
     """
     cleanString = nonwhitespace(inputString).upper()
-    check_for_unrecognised_characters(cleanString)
     try:
         value = int(cleanString, 16)   # Gives error if not hex.
     except ValueError:
@@ -205,18 +197,6 @@ def nonwhitespace(argument):
     This includes removing any single spaces within the string.
     """
     return "".join(argument.split())
-    
-def check_for_unrecognised_characters(argument):
-    """Raise an exception if a character is unrecognised.
-    
-    The only recognised characters in this context are hexadecimal 
-    characters and card ranks and suits.
-    """
-    for i in argument:
-        if i not in RECOGNISED_CHARACTERS:
-            message = ("Character '" + i + 
-                "' not recognised as part of card or hexadecimal.")
-            raise UnrecognisedCharacterError(message)
     
 def convert_to_hex(argument):
     check_number_of_characters(argument)
