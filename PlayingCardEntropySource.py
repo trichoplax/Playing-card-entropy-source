@@ -161,11 +161,8 @@ CARD_SUITS = "SHDC"
 cardCharacters = CARD_RANKS + CARD_SUITS
 hexCharacters = "0123456789ABCDEF"
 RECOGNISED_CHARACTERS = set(cardCharacters + hexCharacters)
-allCards = []
-for s in CARD_SUITS:
-    for t in CARD_RANKS:
-        allCards.append(t+s)
-        
+allCards = [(rank + suit) for suit in CARD_SUITS for rank in CARD_RANKS]
+
 def request_input():
     print(
         "\n"
