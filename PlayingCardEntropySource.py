@@ -154,16 +154,16 @@ class HexValueTooLargeError(Error):
     pass
     
     
-factorial52 = factorial(52)
-upperLimit = factorial52//factorial(52-31) - 1
-cardRanks = "A23456789TJQK"
-cardSuits = "SHDC"
-cardCharacters = cardRanks + cardSuits
+FACTORIAL_52 = factorial(52)
+UPPER_LIMIT = FACTORIAL_52//factorial(52-31) - 1
+CARD_RANKS = "A23456789TJQK"
+CARD_SUITS = "SHDC"
+cardCharacters = CARD_RANKS + CARD_SUITS
 hexCharacters = "0123456789ABCDEF"
-recognisedCharacters = set(i for i in (cardCharacters + hexCharacters))
+RECOGNISED_CHARACTERS = set(i for i in (cardCharacters + hexCharacters))
 allCards = []
-for s in cardSuits:
-    for t in cardRanks:
+for s in CARD_SUITS:
+    for t in CARD_RANKS:
         allCards.append(t+s)
         
 def request_input():
@@ -216,7 +216,7 @@ def check_for_unrecognised_characters(argument):
     characters and card ranks and suits.
     """
     for i in argument:
-        if i not in recognisedCharacters:
+        if i not in RECOGNISED_CHARACTERS:
             message = ("Character '" + i + 
                 "' not recognised as part of card or hexadecimal.")
             raise UnrecognisedCharacterError(message)
@@ -256,7 +256,7 @@ def check_if_cards(listOfCards):
     Every card should be a rank character followed by a suit character.
     """
     for i in listOfCards:
-        if i[0] not in cardRanks:
+        if i[0] not in CARD_RANKS:
             message = (
                 "'" + str(i) + "' is not a recognised card rank.\n"
                 "A valid rank is a single character as follows:\n"
@@ -275,7 +275,7 @@ def check_if_cards(listOfCards):
                 "'K' (king)"
                 )
             raise UnrecognisedCardRankError(message)
-        if i[1] not in cardSuits:
+        if i[1] not in CARD_SUITS:
             message = (
                 "'" + str(i) + "' is not a recognised card suit.\n"
                 "A valid suit is a single character as follows:\n"
@@ -308,7 +308,7 @@ def check_hex_is_in_range(value):
     in hexadecimal as negative without using a minus sign, which has
     already been precluded, check only the upper limit.
     """
-    if value > upperLimit:
+    if value > UPPER_LIMIT:
         message = (
             "The hexadecimal value is too large to be represented by 31 cards.\n"
             "The maximum valid value is 52!/(52-31)! - 1\n"
@@ -345,7 +345,7 @@ def hex_representation(listOfCards):
         listOfNumbers.append(number)
         deck.remove(card)
     for n in range(31):
-        listOfNumbers[n] *= factorial52 // factorial(52-n)
+        listOfNumbers[n] *= FACTORIAL_52 // factorial(52-n)
     result = sum(listOfNumbers)
     return hex(result)[2:]
     
