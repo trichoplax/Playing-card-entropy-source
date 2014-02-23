@@ -179,7 +179,7 @@ def request_input():
         )
     return input()
         
-def process(argument):
+def decide_how_to_convert(inputString):
     """Convert the argument from cards to hex or hex to cards.
     
     Decide whether the argument is hexadecimal or a list of cards.
@@ -190,12 +190,12 @@ def process(argument):
     A valid list of 31 cards will therefore never be a valid 
     hexadecimal string.
     """
-    cleanArgument = nonwhitespace(argument).upper()
-    check_for_unrecognised_characters(cleanArgument)
+    cleanString = nonwhitespace(inputString).upper()
+    check_for_unrecognised_characters(cleanString)
     try:
-        value = int(cleanArgument, 16)   # Gives error if not hex.
+        value = int(cleanString, 16)   # Gives error if not hex.
     except ValueError:
-        print(convert_to_hex(cleanArgument))
+        print(convert_to_hex(cleanString))
     else:
         print(convert_to_cards(value))
 
@@ -383,7 +383,7 @@ if __name__ == "__main__":
     import sys
     arguments = sys.argv
     if len(arguments) < 2:
-        argument = request_input()
+        inputString = request_input()
     else:
-        argument = "".join(arguments[1:])
-    process(argument)
+        inputString = "".join(arguments[1:])
+    decide_how_to_convert(inputString)
