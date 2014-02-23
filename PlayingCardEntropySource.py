@@ -209,7 +209,7 @@ def string_to_card_list(cleanString):
     return listOfCards
 
 def integer_to_card_string(value):
-    check_hex_is_in_range(value)
+    enforce_upper_limit(value)
     return corresponding_card_string(value)
     
 def enforce_62_characters(argument):
@@ -281,7 +281,7 @@ def check_for_card_repetition(listOfCards):
             )
         raise DuplicatedCardsError(message)
         
-def check_hex_is_in_range(value):
+def enforce_upper_limit(value):
     """Check 0 <= value <= 52!/(52-31)! - 1
     
     As Python's arbitrary precision integers cannot be represented
