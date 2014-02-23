@@ -160,7 +160,7 @@ CARD_RANKS = "A23456789TJQK"
 CARD_SUITS = "SHDC"
 cardCharacters = CARD_RANKS + CARD_SUITS
 hexCharacters = "0123456789ABCDEF"
-RECOGNISED_CHARACTERS = set(i for i in (cardCharacters + hexCharacters))
+RECOGNISED_CHARACTERS = set(cardCharacters + hexCharacters)
 allCards = []
 for s in CARD_SUITS:
     for t in CARD_RANKS:
