@@ -201,9 +201,9 @@ def nonwhitespace(argument):
 def string_to_hex(cleanString):
     return card_list_to_hex(string_to_card_list(cleanString))
     
-def string_to_card_list(argument):
-    enforce_62_characters(argument)
-    listOfCards = [argument[i:i+2] for i in range(0, 62, 2)]
+def string_to_card_list(cleanString):
+    enforce_62_characters(cleanString)
+    listOfCards = [cleanString[i:i+2] for i in range(0, 62, 2)]
     check_if_cards(listOfCards)
     check_for_card_repetition(listOfCards)
     return listOfCards
