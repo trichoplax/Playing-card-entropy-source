@@ -189,7 +189,7 @@ def decide_how_to_convert(inputString):
     except ValueError:
         print(string_to_hex(cleanString))
     else:
-        print(integer_to_cards(value))
+        print(integer_to_card_string(value))
 
 def nonwhitespace(argument):
     """Return argument with all whitespace removed.
@@ -208,9 +208,9 @@ def string_to_card_list(argument):
     check_for_card_repetition(listOfCards)
     return listOfCards
 
-def integer_to_cards(value):
+def integer_to_card_string(value):
     check_hex_is_in_range(value)
-    return corresponding_cards(value)
+    return corresponding_card_string(value)
     
 def enforce_62_characters(argument):
     """Raise an exception if not exactly 31 cards."""
@@ -329,7 +329,7 @@ def hex_representation(listOfCards):
     result = sum(listOfNumbers)
     return hex(result)[2:]
     
-def corresponding_cards(value):
+def corresponding_card_string(value):
     """Return a string of 31 cards representing the value.
     
     Divide the value by 52 making a note of quotient and remainder.
