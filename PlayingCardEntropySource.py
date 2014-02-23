@@ -187,9 +187,9 @@ def decide_how_to_convert(inputString):
     try:
         value = int(cleanString, 16)   # Gives error if not hex.
     except ValueError:
-        print(convert_to_hex(cleanString))
+        print(string_to_hex(cleanString))
     else:
-        print(convert_to_cards(value))
+        print(integer_to_cards(value))
 
 def nonwhitespace(argument):
     """Return argument with all whitespace removed.
@@ -198,8 +198,8 @@ def nonwhitespace(argument):
     """
     return "".join(argument.split())
     
-def convert_to_hex(argument):
-    return hex_representation(string_to_card_list(argument))
+def string_to_hex(cleanString):
+    return hex_representation(string_to_card_list(cleanString))
     
 def string_to_card_list(argument):
     enforce_62_characters(argument)
@@ -208,7 +208,7 @@ def string_to_card_list(argument):
     check_for_card_repetition(listOfCards)
     return listOfCards
 
-def convert_to_cards(value):
+def integer_to_cards(value):
     check_hex_is_in_range(value)
     return corresponding_cards(value)
     
