@@ -199,7 +199,7 @@ def nonwhitespace(argument):
     return "".join(argument.split())
     
 def string_to_hex(cleanString):
-    return hex_representation(string_to_card_list(cleanString))
+    return card_list_to_hex(string_to_card_list(cleanString))
     
 def string_to_card_list(argument):
     enforce_62_characters(argument)
@@ -297,7 +297,7 @@ def check_hex_is_in_range(value):
             )
         raise HexValueTooLargeError(message)
     
-def hex_representation(listOfCards):
+def card_list_to_hex(listOfCards):
     """Return a hexadecimal string defined by the 31 cards.
     
     The 52 cards in the full deck are numbered from 0 to 51.
