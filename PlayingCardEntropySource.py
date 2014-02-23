@@ -330,9 +330,11 @@ def card_list_to_hex(listOfCards):
     return hex(result)[2:]
     
 def valid_integer_to_card_string(value):
-    """Return a string of 31 cards representing the value.
+    """Return a string of 31 cards representing value.
     
-    Divide the value by 52 making a note of quotient and remainder.
+    value must be in the range 0 to 52!/(52-31)!-1 for correct output.
+    
+    Divide value by 52 making a note of quotient and remainder.
     The remainder will be a number from 0 to 51.
     Start a list of numbers with this remainder.
     Use the quotient to continue the process.
