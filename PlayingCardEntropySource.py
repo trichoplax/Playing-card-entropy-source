@@ -154,7 +154,7 @@ FACTORIAL_52 = factorial(52)
 UPPER_LIMIT = FACTORIAL_52//factorial(52-31) - 1
 CARD_RANKS = "A23456789TJQK"
 CARD_SUITS = "SHDC"
-allCards = [(rank + suit) for suit in CARD_SUITS for rank in CARD_RANKS]
+ALL_CARDS = [(rank + suit) for suit in CARD_SUITS for rank in CARD_RANKS]
 
 def request_input():
     print(
@@ -319,7 +319,7 @@ def card_list_to_hex(listOfCards):
     The required result is the sum of this list of 31 numbers.
     """
     listOfNumbers = []
-    deck = allCards
+    deck = ALL_CARDS
     for card in listOfCards:
         number = deck.index(card)
         listOfNumbers.append(number)
@@ -347,7 +347,7 @@ def valid_integer_to_card_string(value):
     remaining 51 cards.
     Continue in the same way to convert the remaining numbers to cards.
     """
-    deck = allCards
+    deck = ALL_CARDS
     listOfNumbers = []
     listOfCards = []
     for i in range(31):
