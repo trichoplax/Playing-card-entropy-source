@@ -121,6 +121,7 @@ not give back what you started with (risk of losing your private key).
 
 from math import factorial
 
+
 class Error(Exception):
     """Base class for exceptions in this module."""
     pass
