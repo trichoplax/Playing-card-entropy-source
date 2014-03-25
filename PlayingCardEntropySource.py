@@ -184,11 +184,11 @@ def decide_how_to_convert(inputString):
     A valid list of 31 cards will therefore never be a valid 
     hexadecimal string.
     """
-    cleanString = nonwhitespace(inputString).upper()
+    clean_string = nonwhitespace(inputString).upper()
     try:
-        value = int(cleanString, 16)   # Gives error if not hex.
+        value = int(clean_string, 16)   # Gives error if not hex.
     except ValueError:
-        print(string_to_hex(cleanString))
+        print(string_to_hex(clean_string))
     else:
         print(integer_to_card_string(value))
 
@@ -199,15 +199,15 @@ def nonwhitespace(argument):
     """
     return "".join(argument.split())
     
-def string_to_hex(cleanString):
-    return card_list_to_hex(string_to_card_list(cleanString))
+def string_to_hex(clean_string):
+    return card_list_to_hex(string_to_card_list(clean_string))
     
-def string_to_card_list(cleanString):
-    enforce_62_characters(cleanString)
-    listOfCards = [cleanString[i:i+2] for i in range(0, 62, 2)]
-    check_if_cards(listOfCards)
-    check_for_card_repetition(listOfCards)
-    return listOfCards
+def string_to_card_list(clean_string):
+    enforce_62_characters(clean_string)
+    list_of_cards = [clean_string[i:i+2] for i in range(0, 62, 2)]
+    check_if_cards(list_of_cards)
+    check_for_card_repetition(list_of_cards)
+    return list_of_cards
 
 def integer_to_card_string(value):
     enforce_upper_limit(value)
@@ -231,12 +231,12 @@ def enforce_62_characters(argument):
             )
         raise TooManyCardsError(message)
 
-def check_if_cards(listOfCards):
+def check_if_cards(list_of_cards):
     """Raise an exception if not valid cards.
     
     Every card should be a rank character followed by a suit character.
     """
-    for i in listOfCards:
+    for i in list_of_cards:
         if i[0] not in CARD_RANKS:
             message = (
                 "'" + str(i) + "' is not a recognised card rank.\n"
@@ -267,14 +267,14 @@ def check_if_cards(listOfCards):
                 )
             raise UnrecognisedCardSuitError(message)
             
-def check_for_card_repetition(listOfCards):
+def check_for_card_repetition(list_of_cards):
     """Check that there are 31 unique pairs of characters.
     
     The list is already known to contain exactly 31 pairs.  Just check 
     that each is unique.
     """
-    uniqueCards = set(listOfCards)
-    if not len(uniqueCards) == 31:
+    unique_cards = set(list_of_cards)
+    if not len(unique_cards) == 31:
         message = (
             "No two cards should be the same.\n"
             "Cards should be drawn from a single deck of 52 cards.\n"
@@ -298,7 +298,7 @@ def enforce_upper_limit(value):
             )
         raise HexValueTooLargeError(message)
     
-def card_list_to_hex(listOfCards):
+def card_list_to_hex(list_of_cards):
     """Return a hexadecimal string defined by the 31 cards.
     
     The 52 cards in the full deck are numbered from 0 to 51.
@@ -319,15 +319,15 @@ def card_list_to_hex(listOfCards):
     Continue until all 31 numbers have been updated in this way.
     The required result is the sum of this list of 31 numbers.
     """
-    listOfNumbers = []
+    list_of_numbers = []
     deck = ALL_CARDS
-    for card in listOfCards:
+    for card in list_of_cards:
         number = deck.index(card)
-        listOfNumbers.append(number)
+        list_of_numbers.append(number)
         deck.remove(card)
     for n in range(31):
-        listOfNumbers[n] *= FACTORIAL_52 // factorial(52-n)
-    result = sum(listOfNumbers)
+        list_of_numbers[n] *= FACTORIAL_52 // factorial(52-n)
+    result = sum(list_of_numbers)
     return hex(result)[2:]
     
 def valid_integer_to_card_string(value):
@@ -351,18 +351,18 @@ def valid_integer_to_card_string(value):
     Continue in the same way to convert the remaining numbers to cards.
     """
     deck = ALL_CARDS
-    listOfNumbers = []
-    listOfCards = []
+    list_of_numbers = []
+    list_of_cards = []
     for i in range(31):
         divisor = 52 - i
         quotient = value // divisor
         remainder = value % divisor
-        listOfNumbers.append(remainder)
+        list_of_numbers.append(remainder)
         value = quotient
-    for cardNumber in listOfNumbers:
-        card = deck.pop(cardNumber)
-        listOfCards.append(card)
-    return " ".join(listOfCards)
+    for card_number in list_of_numbers:
+        card = deck.pop(card_number)
+        list_of_cards.append(card)
+    return " ".join(list_of_cards)
     
 # Handle the case where this program is called from the command line.
 if __name__ == "__main__":
